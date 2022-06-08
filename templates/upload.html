@@ -1,0 +1,42 @@
+<!doctype html>
+<title>Python Flask File Upload Example</title>
+<h2>Select a file to upload</h2>
+<p>
+	{% with messages = get_flashed_messages() %}
+	  {% if messages %}
+		<ul>
+		{% for message in messages %}
+		  <li>{{ message }}</li>
+		{% endfor %}
+		</ul>
+	  {% endif %}
+	{% endwith %}
+</p>
+{% if filename %}
+	<div>
+		<img src="{{ url_for('display_image', filename=filename) }}" style="width:100px;height:100px;">
+	</div>
+{% endif %}
+<form method="post" action="/upload" enctype="multipart/form-data">
+    <dl>
+		<label for="pet-select">Choose a body region:</label>
+
+		<select name="region" id="reg-select">
+    		<option value="head">Head</option>
+    		<option value="neck">Neck</option>
+    		<option value="torso">Torso</option>
+    		<option value="upper">Upper extremities</option>
+    		<option value="lower">Lower extremities</option>
+		</select>
+		<p>
+			<input type="file" name="file" autocomplete="off" required>
+		</p>
+    </dl>
+    <p>
+		<input type="submit" value="Load">
+	</p>
+</form>
+<button><a href="/my-link">Search</a></button>
+{% for url in links %}
+	<img src="{{ url }}" style="width:100px;height:100px;">
+{% endfor %}
